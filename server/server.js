@@ -34,12 +34,18 @@ app.use("/api/messages", messageRoutes);
 
 // http://localhost:5000 => client,server
 
-if (process.env.NODE_ENV === "production") {
-	app.use(express.static(path.join(__dirname, "/client/dist")));
-	// React app
-	app.get("*", (req, res) => {
-		res.sendFile(path.resolve(__dirname, "client", "dist", "index.html"));
-	});
-}
+// if (process.env.NODE_ENV === "production") {
+// 	app.use(express.static(path.join(__dirname, "/client/dist")));
+// 	// React app
+// 	app.get("*", (req, res) => {
+// 		res.sendFile(path.resolve(__dirname, "client", "dist", "index.html"));
+// 	});
+// }
+
+app.use(express.static(path.join(__dirname, '/client/dist')));
+app.get("*", (req, res) => {
+	res.sendFile(path.resolve(__dirname, "client", "dist", "index.html"));
+
+})
 
 server.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
